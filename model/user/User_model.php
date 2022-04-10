@@ -1,0 +1,60 @@
+<?php
+//-------------- mendaftarkan user -------------------//
+    function register_model($data){
+        global $mysqli;
+        //mencegah sql injection
+        $username = $data['username'];
+        //dd(gettype($username));
+        $pass = escape($data['password']);
+        $query = "INSERT INTO user(firstname, lastname, phone, email, username, password, login_type) 
+                    VALUES('$data[firstname]', '$data[lastname]', '$data[phone]', '$data[email]', '$username', '$pass', '$data[login_type]')";
+        $user_new = mysqli_query($mysqli, $query);
+
+        if($user_new){
+            $result = 1;
+            return $result;
+        }else{
+            return NULL;
+        }
+    }
+    
+    //---- mencegah sql injection -----//
+    function escape($data){
+        global $mysqli;
+        return mysqli_real_escape_string($mysqli, $data);
+    }
+    
+    //--- mengecek username apakah sudah terdaftar atau belum ---//
+    function cek_username($name){
+        global $mysqli;
+        $query = "SELECT * FROM user WHERE username = '$name'";
+        if( $result = mysqli_query($mysqli, $query) ) return mysqli_num_rows($result);
+    }
+
+    //--- mengecek username dan password sudah sesuai atau belum ---//
+    function cek_pass_user($name , $pass){
+        global $mysqli;
+        $query  = "SELECT * FROM user WHERE username = '$name' && password = '$pass'";
+        if( $result = mysqli_query($mysqli, $query) ) return mysqli_num_rows($result);
+    }
+    
+    //----------------- cek data user ------------------//
+    function cek_data_user($name){
+        global $mysqli;
+        //mencegah sql injection
+        $nama = escape($name);
+        //$password = escape($pass);
+        
+        $query  = "SELECT * FROM user WHERE username = '$nama'";
+        $result = mysqli_query($mysqli, $query);
+        $data_user = mysqli_fetch_assoc($result);
+        $user = array(
+            'id_user' => $data_user['id_user'],
+            'username' => $data_user['username'],
+            'login_type' => $data_user['login_type'],
+            'email' => $data_user['email']
+        );
+        return $user;    
+    }
+
+?>
