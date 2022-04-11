@@ -48,13 +48,45 @@
         $query  = "SELECT * FROM user WHERE username = '$nama'";
         $result = mysqli_query($mysqli, $query);
         $data_user = mysqli_fetch_assoc($result);
-        $user = array(
-            'id_user' => $data_user['id_user'],
-            'username' => $data_user['username'],
-            'login_type' => $data_user['login_type'],
-            'email' => $data_user['email']
-        );
-        return $user;    
+        if(!is_null($data_user)){
+            $user = array(
+                'status' => 'success',
+                'id_user' => $data_user['id_user'],
+                'username' => $data_user['username'],
+                'login_type' => $data_user['login_type'],
+                'email' => $data_user['email']
+            );
+            return $user;
+        }else{
+            $user = null;
+            return $user;
+        }    
+    }
+
+    function cek_profile($username){
+        global $mysqli;
+        $nama = escape($username);
+        $query  = "SELECT * FROM user WHERE username = '$nama'";
+        $result = mysqli_query($mysqli, $query);
+        $data_user = mysqli_fetch_assoc($result);
+        //dd($data_user);
+        if(!is_null($data_user)){
+            $profile_u = array(
+                'status' => 'success',
+                'id_user' => $data_user['id_user'],
+                'firstname' => $data_user['firstname'],
+                'lastname' => $data_user['lastname'],
+                'phone' => $data_user['phone'],
+                'email' => $data_user['email'],
+                'username' => $data_user['username'],
+                'login_type' => $data_user['login_type'],
+            );
+            return $profile_u;
+        }else{
+            $profile_u = null;
+            return $profile_u;
+        }
+        
     }
 
 ?>
