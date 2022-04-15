@@ -39,15 +39,15 @@
     }
     
     //----------------- cek data user ------------------//
-    function cek_data_user($name){
+    function cek_data_user($username){
         global $mysqli;
         //mencegah sql injection
-        $nama = escape($name);
+        //$nama = escape($name);
         //$password = escape($pass);
         
-        $query  = "SELECT * FROM user WHERE username = '$nama'";
+        $query  = "SELECT * FROM user WHERE username = '$username'";
         $result = mysqli_query($mysqli, $query);
-        $data_user = mysqli_fetch_assoc($result);
+        $data_user = mysqli_fetch_array($result);
         if(!is_null($data_user)){
             $user = array(
                 'status' => 'success',

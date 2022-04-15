@@ -8,7 +8,7 @@
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
         
         $user = cek_data_user($_POST['username']);//validasi username
-        //dd($user['username']);
+        //dd($user);
         if(!is_null($user)){
             $pass_user = sha1($_POST['password']);
             $validasi_pass = cek_pass_user($_POST['username'], $pass_user);//validasi username password
