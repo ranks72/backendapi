@@ -6,8 +6,8 @@
         $username = $data['username'];
         //dd(gettype($username));
         $pass = escape($data['password']);
-        $query = "INSERT INTO user(firstname, lastname, phone, email, username, password, login_type) 
-                    VALUES('$data[firstname]', '$data[lastname]', '$data[phone]', '$data[email]', '$username', '$pass', '$data[login_type]')";
+        $query = "INSERT INTO user(firstname, lastname, phone, email, username, password, login_type, pertanyaan_validasi, answer_validation) 
+                    VALUES('$data[firstname]', '$data[lastname]', '$data[phone]', '$data[email]', '$username', '$pass', '$data[login_type]', '$data[pertanyaan_validasi]', '$data[answer_validation]')";
         $user_new = mysqli_query($mysqli, $query);
 
         if($user_new){
