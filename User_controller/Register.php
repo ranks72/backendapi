@@ -14,6 +14,8 @@
     $regis['phone'] = $jsondata->phone;
     $regis['email'] = $jsondata->email;
     $regis['login_type'] = $jsondata->login_type;
+    $regis['pertanyaan_validasi'] = $jsondata->pertanyaan_validasi;
+    $regis['answer_validation'] = $jsondata->answer_validation;
 
     if (!empty($regis['username'])) {
         $data_user = cek_username($regis['username']);
