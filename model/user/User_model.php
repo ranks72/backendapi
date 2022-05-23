@@ -17,6 +17,37 @@
             return NULL;
         }
     }
+
+    function forget_model($data){
+        global $mysqli;
+        $username = $data['username'];
+        $query = "UPDATE user SET password = '$data[new_password]' where username = '$username'";
+        $pass_new = mysqli_query($mysqli, $query);
+        if($pass_new){
+            $result = "Password telah diganti";
+            return $result;
+        }else{
+            return NULL;
+        }
+
+    }
+
+    function change_profile_model($data){
+        global $mysqli;
+        $profile = $data;
+        //$pass = escape($profile['password']);
+        $query = "UPDATE user SET firstname = '$profile[firstname]', lastname = '$profile[lastname]',
+                phone = '$profile[phone]', email = '$profile[email]', username = '$profile[username]', 
+                pertanyaan_validasi = '$profile[pertanyaan_validasi]', answer_validation = '$profile[answer_validation]' where username = '$profile[username]'";
+        $pass_new = mysqli_query($mysqli, $query);
+        if($pass_new){
+            $result = "Profile telah diganti";
+            return $result;
+        }else{
+            return NULL;
+        }
+
+    }
     
     //---- mencegah sql injection -----//
     function escape($data){
@@ -54,7 +85,9 @@
                 'id_user' => $data_user['id_user'],
                 'username' => $data_user['username'],
                 'login_type' => $data_user['login_type'],
-                'email' => $data_user['email']
+                'email' => $data_user['email'],
+                'pertanyaan_validasi' => $data_user['pertanyaan_validasi'],
+                'answer_validation' => $data_user['answer_validation'],
             );
             return $user;
         }else{
@@ -80,6 +113,8 @@
                 'email' => $data_user['email'],
                 'username' => $data_user['username'],
                 'login_type' => $data_user['login_type'],
+                'pertanyaan_validasi' => $data_user['pertanyaan_validasi'],
+                'answer_validation' => $data_user['answer_validation'],
             );
             return $profile_u;
         }else{
