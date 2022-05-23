@@ -6,7 +6,6 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     $jsondata = json_decode(file_get_contents("php://input"));
-
     $regis['username'] = $jsondata->username;
     $regis['password'] = $jsondata->password;
     $regis['firstname'] = $jsondata->firstname;
@@ -17,7 +16,7 @@
     $regis['pertanyaan_validasi'] = $jsondata->pertanyaan_validasi;
     $regis['answer_validation'] = $jsondata->answer_validation;
 
-    if (!empty($regis['username'])) {
+    if (!empty($regis['username']) || !empty($regis['password'])) {
         $data_user = cek_username($regis['username']);
         //dd($data_user);
         if($data_user == 0){
