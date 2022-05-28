@@ -13,4 +13,17 @@
         return $data;
     }
     
+    function create_kategori($data){
+        global $mysqli;
+        //mencegah sql injection
+        $query = "INSERT INTO category(category) VALUES ('$data[category]')";
+        $user_new = mysqli_query($mysqli, $query);
+
+        if($user_new){
+            $result = 1;
+            return $result;
+        }else{
+            return NULL;
+        }
+    }
 ?>

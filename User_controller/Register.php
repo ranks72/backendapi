@@ -16,7 +16,7 @@
     $regis['pertanyaan_validasi'] = $jsondata->pertanyaan_validasi;
     $regis['answer_validation'] = $jsondata->answer_validation;
 
-    if (!empty($regis['username']) || !empty($regis['password'])) {
+    if (!empty($regis['username']) && !empty($regis['password'])) {
         $data_user = cek_username($regis['username']);
         //dd($data_user);
         if($data_user == 0){
@@ -54,7 +54,7 @@
     }else{
         $result = array(
             'status' => 'error',
-            'message' => "Username kosong"
+            'message' => "Username dan password kosong"
         );
         
         header('Content-Type: application/json');
