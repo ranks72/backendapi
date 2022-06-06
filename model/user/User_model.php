@@ -1,4 +1,26 @@
 <?php
+
+    function get_user_all(){
+        global $mysqli;
+        $query = "SELECT * FROM user";
+        $result = mysqli_query($mysqli, $query);
+        
+        while( $row = mysqli_fetch_array( $result)){
+            $data[] = array(
+                'id_user' => $row['id_user'],
+                'firstname' => $row['firstname'],
+                'lastname' => $row['lastname'],
+                'phone' => $row['phone'],
+                'email' => $row['email'],
+                'username' => $row['username'],
+                'login_type' => $row['login_type'],
+                'pertanyaan_validasi' => $row['pertanyaan_validasi'],
+                'answer_validation' => $row['answer_validation'],
+            ); // Inside while loop
+        }
+        return $data;
+    }
+
 //-------------- mendaftarkan user -------------------//
     function register_model($data){
         global $mysqli;

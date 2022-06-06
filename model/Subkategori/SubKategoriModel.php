@@ -1,5 +1,5 @@
 <?php
-    function get_all(){
+    function get_subkat_all(){
         global $mysqli;
         $query = "SELECT * FROM category";
         $result = mysqli_query($mysqli, $query);
