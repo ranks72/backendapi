@@ -11,7 +11,7 @@
             $count_answer = count_answer_user($profile['id_user'],$_GET['category']);
             //dd($count_answer);
 
-            if($count_answer = 0){
+            if($count_answer == 0){
                 $count_rows = count_question($_GET['category']);
                 for($i=0; $i < $count_rows; $i++){
                     $test = create_answer($question[$i],$profile['id_user']);
