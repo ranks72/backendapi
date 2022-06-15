@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Jun 2022 pada 13.34
+-- Waktu pembuatan: 15 Jun 2022 pada 13.38
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.1
 
@@ -43,9 +43,7 @@ INSERT INTO `category` (`id_category`, `category`) VALUES
 (3, 'Organitation Belonging'),
 (4, 'Administrasi'),
 (5, 'Event'),
-(6, 'Pengembangan Diri'),
-(10, 'pilihan-life'),
-(11, 'pilihan-life');
+(6, 'Pengembangan Diri');
 
 -- --------------------------------------------------------
 
@@ -56,38 +54,25 @@ INSERT INTO `category` (`id_category`, `category`) VALUES
 CREATE TABLE `feedback` (
   `id_feedback` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_category` int(11) NOT NULL,
-  `feedback` varchar(225) NOT NULL
+  `id_question` int(11) NOT NULL,
+  `id_result` int(11) DEFAULT NULL,
+  `cek_answer` int(11) DEFAULT NULL COMMENT 'if 1 already answer else not answer',
+  `feedback` varchar(225) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `feedback`
 --
 
-INSERT INTO `feedback` (`id_feedback`, `id_user`, `id_category`, `feedback`) VALUES
-(1, 2, 1, 'Biasalffah'),
-(2, 3, 1, 'saya.sudah mengisi'),
-(3, 1, 1, ''),
-(4, 20, 1, 'saya dana'),
-(5, 22, 1, 'saya dana 7'),
-(6, 22, 3, 'category 3 jawaban dana7'),
-(7, 24, 1, 'dans 8 pengelola'),
-(8, 24, 3, 'organisasi dans8\n'),
-(9, 26, 1, 'dans 11 pengelola'),
-(10, 26, 3, 'dans11 administrasi'),
-(11, 27, 1, 'dans12 pengelola'),
-(12, 28, 1, 'dans 13 pengelola'),
-(13, 28, 3, 'dan13 adminstrasi\n'),
-(14, 29, 1, 'dans15 pengelola\n'),
-(15, 29, 3, 'dans15 organisasi'),
-(16, 30, 1, 'dans17 pengelola\n'),
-(17, 30, 3, 'dans17 organisasi'),
-(18, 31, 1, 'dans18 pengelola'),
-(19, 31, 2, 'dans18 medsos'),
-(20, 31, 3, 'dans18 organisasi\n'),
-(21, 31, 4, 'dans18 administrasi\n'),
-(22, 31, 5, 'dans18 event\n'),
-(23, 31, 6, 'dans18  pengembangan\n');
+INSERT INTO `feedback` (`id_feedback`, `id_user`, `id_question`, `id_result`, `cek_answer`, `feedback`) VALUES
+(31, 60, 1, 3, 1, NULL),
+(32, 60, 2, NULL, 0, NULL),
+(33, 60, 3, NULL, 0, NULL),
+(34, 60, 4, NULL, 0, NULL),
+(67, 58, 1, 3, 1, NULL),
+(68, 58, 2, NULL, 0, NULL),
+(69, 58, 3, NULL, 0, NULL),
+(70, 58, 4, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,8 +112,8 @@ CREATE TABLE `question` (
 INSERT INTO `question` (`id_question`, `id_category`, `question`) VALUES
 (1, 1, 'Pusat Karier memiliki visi dan misi yang jelas\r\n'),
 (2, 1, 'Tujuan dari Pusat Karier telah difahami dengan baik oleh seluruh pengguna layanan\r\n'),
-(3, 1, 'Pusat Karier memberikan layanan konsisten dengan tujuan\r\n'),
-(4, 1, 'Informasi layanan Pusat Karier mudah diakses\r\n'),
+(3, 1, 'Pusat Karier memberikan layanan konsisten dengan tujuan'),
+(4, 1, 'Informasi layanan Pusat Karier mudah diakses'),
 (5, 2, 'Konten Media Pusat Karier informatif\r\n'),
 (6, 2, 'Presentasi Media Pusat Karier Menarik\r\n'),
 (7, 2, 'Konten Media Pusat Karier mudah difahami\r\n'),
@@ -181,119 +166,6 @@ INSERT INTO `result` (`id_result`, `result`) VALUES
 (2, 'Setuju'),
 (3, 'Tidak Setuju'),
 (4, 'Sangat Tidak Setuju');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `survey`
---
-
-CREATE TABLE `survey` (
-  `id_survey` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_question` int(11) NOT NULL,
-  `id_result` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `survey`
---
-
-INSERT INTO `survey` (`id_survey`, `id_user`, `id_question`, `id_result`) VALUES
-(1, 1, 1, 2),
-(2, 3, 1, 2),
-(3, 2, 1, 3),
-(4, 2, 2, 4),
-(5, 2, 3, 3),
-(6, 2, 4, 2),
-(7, 2, 4, 2),
-(8, 3, 2, 3),
-(9, 3, 3, 4),
-(10, 3, 4, 1),
-(11, 1, 2, 1),
-(12, 1, 3, 1),
-(13, 1, 4, 1),
-(14, 20, 1, 4),
-(15, 20, 2, 3),
-(16, 20, 3, 4),
-(17, 20, 4, 4),
-(18, 22, 1, 1),
-(19, 22, 2, 2),
-(20, 22, 3, 2),
-(21, 22, 4, 4),
-(22, 22, 10, 1),
-(23, 22, 11, 2),
-(24, 22, 12, 4),
-(25, 22, 13, 1),
-(26, 22, 14, 3),
-(27, 24, 1, 1),
-(28, 24, 2, 2),
-(29, 24, 3, 3),
-(30, 24, 4, 4),
-(31, 24, 13, 1),
-(32, 24, 14, 1),
-(33, 25, 1, 1),
-(34, 25, 3, 3),
-(35, 25, 15, 2),
-(36, 25, 16, 4),
-(37, 25, 17, 3),
-(38, 26, 1, 1),
-(39, 26, 2, 2),
-(40, 26, 3, 3),
-(41, 26, 4, 4),
-(42, 26, 13, 1),
-(43, 26, 14, 2),
-(44, 27, 1, 1),
-(45, 27, 2, 2),
-(46, 27, 3, 3),
-(47, 27, 4, 4),
-(48, 28, 1, 1),
-(49, 28, 2, 2),
-(50, 28, 3, 3),
-(51, 28, 4, 3),
-(52, 28, 13, 1),
-(53, 28, 14, 3),
-(54, 29, 1, 1),
-(55, 29, 2, 2),
-(56, 29, 3, 3),
-(57, 29, 4, 4),
-(58, 29, 13, 2),
-(59, 29, 14, 4),
-(60, 30, 1, 1),
-(61, 30, 2, 2),
-(62, 30, 3, 3),
-(63, 30, 4, 4),
-(64, 30, 10, 1),
-(65, 30, 11, 2),
-(66, 30, 12, 3),
-(67, 30, 13, 4),
-(68, 30, 14, 4),
-(69, 31, 1, 1),
-(70, 31, 2, 2),
-(71, 31, 3, 3),
-(72, 31, 4, 4),
-(73, 31, 5, 1),
-(74, 31, 6, 2),
-(75, 31, 7, 3),
-(76, 31, 8, 4),
-(77, 31, 9, 2),
-(78, 31, 10, 1),
-(79, 31, 11, 2),
-(80, 31, 12, 3),
-(81, 31, 13, 4),
-(82, 31, 14, 2),
-(83, 31, 15, 1),
-(84, 31, 16, 3),
-(85, 31, 17, 4),
-(86, 31, 18, 1),
-(87, 31, 19, 2),
-(88, 31, 20, 3),
-(89, 31, 21, 4),
-(90, 31, 22, 2),
-(91, 31, 23, 1),
-(92, 31, 24, 4),
-(93, 31, 25, 2),
-(94, 31, 26, 4);
 
 -- --------------------------------------------------------
 
@@ -362,12 +234,6 @@ ALTER TABLE `result`
   ADD PRIMARY KEY (`id_result`);
 
 --
--- Indeks untuk tabel `survey`
---
-ALTER TABLE `survey`
-  ADD PRIMARY KEY (`id_survey`);
-
---
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
@@ -387,7 +253,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT untuk tabel `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id_feedback` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_feedback` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT untuk tabel `menu`
@@ -406,12 +272,6 @@ ALTER TABLE `question`
 --
 ALTER TABLE `result`
   MODIFY `id_result` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT untuk tabel `survey`
---
-ALTER TABLE `survey`
-  MODIFY `id_survey` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
