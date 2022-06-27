@@ -3,23 +3,34 @@
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=UTF-8");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    if (isset($_GET['username']) && isset($_GET['category'])) {
+    if (isset($_GET['username'])) {
         $profile = cek_profile($_GET['username']);
         //dd($profile);
         if(!is_null($profile)){
-            $question = get_question_bykategori($_GET['category']);
-            $count_answer = count_answer_user($profile['id_user'],$_GET['category']);
-            //dd($count_answer);
+            $question = get_question_byall();
+            $count_question = count_answer_user($profile['id_user']);
 
-            if($count_answer == 0){
-                $count_rows = count_question($_GET['category']);
+            if($count_question == 0){
+                $count_rows = count_question();
                 for($i=0; $i < $count_rows; $i++){
                     $test = create_answer($question[$i],$profile['id_user']);
                 }
-                $result = get_question_not_answer($_GET['category'],$profile['id_user']);
-
+                $kategori = get_subkat_all();
+                $hasil = get_question_not_answer($profile['id_user']);
+                $result = array(
+                    'status' => 'success',
+                    'kategori' => $hasil,
+                );
             }else{
-                $result = get_question_not_answer($_GET['category'],$profile['id_user']);
+                // $kategori = get_subkat_all();
+                // dd($kategori);
+                $hasil = get_question_not_answer($profile['id_user']);
+                //dd($hasil);
+                $result = array(
+                    'status' => 'success',
+                    'message' => $hasil,
+                );
+                
             }
             
             //dd($profile['id_user']);
